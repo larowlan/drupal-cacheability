@@ -1,50 +1,106 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+  <title>Testing twig with jest</title>
+  <meta name="description"
+        content="Testing twig with jest">
+  <meta name="author" content="Lee Rowlands">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/night.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+  <style>
+    .cross {color: red;}
+    .check {color: green;}
+    body {
+      background-image: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          color-stop(0.48, #EBECF0),
+          color-stop(0.67, #FFFFFF)
+      );
+      background-image: -o-linear-gradient(bottom, #EBECF0 48%, #FFFFFF 67%);
+      background-image: -moz-linear-gradient(bottom, #EBECF0 48%, #FFFFFF 67%);
+      background-image: -webkit-linear-gradient(bottom, #EBECF0 48%, #FFFFFF 67%);
+      background-image: -ms-linear-gradient(bottom, #EBECF0 48%, #FFFFFF 67%);
+      background-image: linear-gradient(to bottom, #EBECF0 48%, #FFFFFF 67%);
+    }
+    body .reveal {
+      background: #00235d;
+      background-image: url(images/pnx-logo-dark.png);
+      background-position: right bottom;
+      background-position-x: 2%;
+      background-position-y: 96%;
+      background-repeat: no-repeat;
+    }
+    .reveal .credit {
+      color: #fff;
+      font-size: 16px !important;
+    }
+    img .reveal {
+      max-height: 75%;
+    }
+    section[data-background] {
+      background: #00235dcc;
+    }
+    ul.tight li {
+      padding: 0;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4em;
+    }
+    .reveal pre code {
+      margin: 0 -3em;
+    }
+  </style>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+    <section data-markdown="slides.md"
+             data-separator="^\n---\n$"
+             data-vertical="^\n--\n$"
+             data-notes="^Note:">
+    </section>
+  </div>
+</div>
 
-		<script src="js/reveal.js"></script>
+<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				hash: true,
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/highlight/highlight.js' },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
-		</script>
-	</body>
+<script>
+  // More info about config & dependencies:
+  // - https://github.com/hakimel/reveal.js#configuration
+  // - https://github.com/hakimel/reveal.js#dependencies
+  Reveal.initialize({
+    hash: true,
+    dependencies: [
+      { src: 'plugin/markdown/marked.js' },
+      { src: 'plugin/markdown/markdown.js' },
+      { src: 'plugin/highlight/highlight.js' },
+      { src: 'plugin/notes/notes.js', async: true }
+    ]
+  });
+  Reveal.addEventListener( 'slidechanged', function( event ) {
+    event.currentSlide.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+</body>
 </html>
