@@ -1,5 +1,4 @@
-<!--- .slide: data-background="./images/bttf.jpg" --->
-### Testing twig with jest
+### Testing twig components <br/>with jest
 
 ---
 
@@ -10,7 +9,8 @@ Note:
 - Assumed knowledge
 - Background
 - JavaScript testing ecosystem
-- Example
+- Meat and potatoes
+- Final word
 
 ---
 
@@ -18,12 +18,15 @@ Note:
 
 Note:
 
-- Modern JS features like object destructuring, arrow functions, esm
+- Modern JS features like 
+> - object destructuring, 
+> - arrow functions, 
+> - esm
 - familiar with the concept of component driven design
 
 ---
 
-### PreviousNext front end <br/>workflow
+#### ♻️ PreviousNext front end <br/>workflow
 
 * Style guide driven development https://youtu.be/uHWlUhvBwr0
 * Twig ninja tactics https://youtu.be/HytOs7TS-FY
@@ -47,7 +50,6 @@ Note:
 
 - this story starts with react
 - known state yields set of markup, state changes cause updates
-- twig has the same starting point, set variable, given markup
 
 ---
 
@@ -57,6 +59,7 @@ Variables + Template + Logic = Markup
 
 Note:
 
+- twig has the same starting point, set variable, given markup
 - you can test this with phpunit 
 - does not require Drupal (even in D7)
 - fast, robust
@@ -190,16 +193,31 @@ Note:
 
 ---
 
-### Example
+### Usage
 
 <pre><code class="language-javascript hljs">
 import {render, fireEvent} from "twig-testing-library"
 
+describe('Some test suite', () => {
+  it('should do something', async () => {
+    const { getByText } = render('/some/file.twig', {
+      some_variable: 'something',
+    })
+    const button = getByText('Some button')
+    fireEvent.click(button)
+    expect(getByText('Something else')).toBeTruthy()
+  })
+})
 </code></pre>
 
 ---
 
 ### Let's run it  🤩
+
+Note:
+
+- fire up phpstorm, walk thorugh the files
+- terminal - run jest
 
 ---
 
@@ -219,6 +237,18 @@ Note:
 
 - snapshot testing is the lowest barrier of entry to testing
 - prevent broken markup
+- back to phpstorm, fiddle with accordion__content
+- rerun
+
+---
+
+### Other wins
+
+Note:
+
+- coverage 
+- terminal - run coverage
+- debugging support in phpstorm - breakpoints in your JS 
 
 ---
 
@@ -231,7 +261,7 @@ Note:
 
 ---
 
-### this pyramid
+### This pyramid
 
 <img src="https://martinfowler.com/articles/practical-test-pyramid/testPyramid.png" alt="testing pyramid"/>
 
@@ -246,7 +276,7 @@ Note:
 
 ---
 
-### maximize your return
+### Maximize your return
 
 Note:
 
@@ -257,7 +287,18 @@ Note:
 
 ---
 
+### Disclaimers
+
+Note:
+
+- jest uses jsdom to implement browser apis
+- twigjs is not the same twig Drupal is using, but its good enough
+
+---
+
 ### Summing up
+
+github.com/larowlan/twig-testing-library
 
 Note:
 
